@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="paum_tp1_aspModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="article">
+    <Key>
+      <PropertyRef Name="num_art" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="num_art" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="description_art" Type="nchar" MaxLength="300" />
+    <Property Name="prix_art" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="num_cli" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="num_cli" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="nom_cli" Type="nchar" MaxLength="15" />
+    <Property Name="adress_cli" Type="nchar" MaxLength="15" />
+    <Property Name="ville_cli" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="commande">
+    <Key>
+      <PropertyRef Name="num_com" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="num_com" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="date_com" Type="date" />
+    <Property Name="num_cli" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="num_art" Type="nchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_commande_ToArticle">
+    <End Role="article" Type="Self.article" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="commande" Type="Self.commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="article">
+        <PropertyRef Name="num_art" />
+      </Principal>
+      <Dependent Role="commande">
+        <PropertyRef Name="num_art" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_commande_ToClient">
+    <End Role="client" Type="Self.client" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="commande" Type="Self.commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="num_cli" />
+      </Principal>
+      <Dependent Role="commande">
+        <PropertyRef Name="num_cli" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="paum_tp1_aspModelStoreContainer">
+    <EntitySet Name="article" EntityType="Self.article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="commande" EntityType="Self.commande" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_commande_ToArticle" Association="Self.FK_commande_ToArticle">
+      <End Role="article" EntitySet="article" />
+      <End Role="commande" EntitySet="commande" />
+    </AssociationSet>
+    <AssociationSet Name="FK_commande_ToClient" Association="Self.FK_commande_ToClient">
+      <End Role="client" EntitySet="client" />
+      <End Role="commande" EntitySet="commande" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

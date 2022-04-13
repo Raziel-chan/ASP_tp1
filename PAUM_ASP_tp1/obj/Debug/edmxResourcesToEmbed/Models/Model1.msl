@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="paum_tp1_aspModelStoreContainer" CdmEntityContainer="paum_tp1_aspEntities2">
+    <EntitySetMapping Name="article">
+      <EntityTypeMapping TypeName="paum_tp1_aspModel.article">
+        <MappingFragment StoreEntitySet="article">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="num_art" ColumnName="num_art" />
+          <ScalarProperty Name="description_art" ColumnName="description_art" />
+          <ScalarProperty Name="prix_art" ColumnName="prix_art" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="client">
+      <EntityTypeMapping TypeName="paum_tp1_aspModel.client">
+        <MappingFragment StoreEntitySet="client">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="num_cli" ColumnName="num_cli" />
+          <ScalarProperty Name="nom_cli" ColumnName="nom_cli" />
+          <ScalarProperty Name="adress_cli" ColumnName="adress_cli" />
+          <ScalarProperty Name="ville_cli" ColumnName="ville_cli" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commande">
+      <EntityTypeMapping TypeName="paum_tp1_aspModel.commande">
+        <MappingFragment StoreEntitySet="commande">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="num_com" ColumnName="num_com" />
+          <ScalarProperty Name="date_com" ColumnName="date_com" />
+          <ScalarProperty Name="num_cli" ColumnName="num_cli" />
+          <ScalarProperty Name="num_art" ColumnName="num_art" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

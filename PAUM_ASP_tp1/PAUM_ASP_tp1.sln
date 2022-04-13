@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAUM_ASP_tp1", "PAUM_ASP_tp1\PAUM_ASP_tp1.csproj", "{E7790086-C68F-47F2-9A2A-13F6E5742004}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7790086-C68F-47F2-9A2A-13F6E5742004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7790086-C68F-47F2-9A2A-13F6E5742004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7790086-C68F-47F2-9A2A-13F6E5742004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7790086-C68F-47F2-9A2A-13F6E5742004}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2112B2CB-69C7-4FB5-953E-9E98ED4F2D70}
+	EndGlobalSection
+EndGlobal

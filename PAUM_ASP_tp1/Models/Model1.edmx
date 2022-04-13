@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="paum_tp1_aspModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="article">
+          <Key>
+            <PropertyRef Name="num_art" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="num_art" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="description_art" Type="nchar" MaxLength="300" />
+          <Property Name="prix_art" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="num_cli" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="num_cli" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="nom_cli" Type="nchar" MaxLength="15" />
+          <Property Name="adress_cli" Type="nchar" MaxLength="15" />
+          <Property Name="ville_cli" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="commande">
+          <Key>
+            <PropertyRef Name="num_com" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="num_com" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="date_com" Type="date" />
+          <Property Name="num_cli" Type="nchar" MaxLength="15" />
+          <Property Name="num_art" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <Association Name="FK_commande_ToArticle">
+          <End Role="article" Type="Self.article" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="commande" Type="Self.commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="article">
+              <PropertyRef Name="num_art" />
+            </Principal>
+            <Dependent Role="commande">
+              <PropertyRef Name="num_art" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commande_ToClient">
+          <End Role="client" Type="Self.client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="commande" Type="Self.commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="num_cli" />
+            </Principal>
+            <Dependent Role="commande">
+              <PropertyRef Name="num_cli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="paum_tp1_aspModelStoreContainer">
+          <EntitySet Name="article" EntityType="Self.article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="commande" EntityType="Self.commande" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_commande_ToArticle" Association="Self.FK_commande_ToArticle">
+            <End Role="article" EntitySet="article" />
+            <End Role="commande" EntitySet="commande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commande_ToClient" Association="Self.FK_commande_ToClient">
+            <End Role="client" EntitySet="client" />
+            <End Role="commande" EntitySet="commande" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="paum_tp1_aspModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="article">
+          <Key>
+            <PropertyRef Name="num_art" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="num_art" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="description_art" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="prix_art" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="commande" Relationship="Self.FK_commande_ToArticle" FromRole="article" ToRole="commande" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="num_cli" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="num_cli" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nom_cli" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="adress_cli" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="ville_cli" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="commande" Relationship="Self.FK_commande_ToClient" FromRole="client" ToRole="commande" />
+        </EntityType>
+        <EntityType Name="commande">
+          <Key>
+            <PropertyRef Name="num_com" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="num_com" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="date_com" Type="DateTime" Precision="0" />
+          <Property Name="num_cli" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="num_art" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="article" Relationship="Self.FK_commande_ToArticle" FromRole="commande" ToRole="article" />
+          <NavigationProperty Name="client" Relationship="Self.FK_commande_ToClient" FromRole="commande" ToRole="client" />
+        </EntityType>
+        <Association Name="FK_commande_ToArticle">
+          <End Role="article" Type="Self.article" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="commande" Type="Self.commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="article">
+              <PropertyRef Name="num_art" />
+            </Principal>
+            <Dependent Role="commande">
+              <PropertyRef Name="num_art" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commande_ToClient">
+          <End Role="client" Type="Self.client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="commande" Type="Self.commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="num_cli" />
+            </Principal>
+            <Dependent Role="commande">
+              <PropertyRef Name="num_cli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="paum_tp1_aspEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="article" EntityType="Self.article" />
+          <EntitySet Name="client" EntityType="Self.client" />
+          <EntitySet Name="commande" EntityType="Self.commande" />
+          <AssociationSet Name="FK_commande_ToArticle" Association="Self.FK_commande_ToArticle">
+            <End Role="article" EntitySet="article" />
+            <End Role="commande" EntitySet="commande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commande_ToClient" Association="Self.FK_commande_ToClient">
+            <End Role="client" EntitySet="client" />
+            <End Role="commande" EntitySet="commande" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="paum_tp1_aspModelStoreContainer" CdmEntityContainer="paum_tp1_aspEntities1">
+          <EntitySetMapping Name="article">
+            <EntityTypeMapping TypeName="paum_tp1_aspModel.article">
+              <MappingFragment StoreEntitySet="article">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="num_art" ColumnName="num_art" />
+                <ScalarProperty Name="description_art" ColumnName="description_art" />
+                <ScalarProperty Name="prix_art" ColumnName="prix_art" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client">
+            <EntityTypeMapping TypeName="paum_tp1_aspModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="num_cli" ColumnName="num_cli" />
+                <ScalarProperty Name="nom_cli" ColumnName="nom_cli" />
+                <ScalarProperty Name="adress_cli" ColumnName="adress_cli" />
+                <ScalarProperty Name="ville_cli" ColumnName="ville_cli" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="commande">
+            <EntityTypeMapping TypeName="paum_tp1_aspModel.commande">
+              <MappingFragment StoreEntitySet="commande">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="num_com" ColumnName="num_com" />
+                <ScalarProperty Name="date_com" ColumnName="date_com" />
+                <ScalarProperty Name="num_cli" ColumnName="num_cli" />
+                <ScalarProperty Name="num_art" ColumnName="num_art" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
